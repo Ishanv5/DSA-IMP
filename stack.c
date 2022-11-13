@@ -1,74 +1,88 @@
-// write a program to perform push,pop and peek operations
+// Stack using Array.
 #include <stdio.h>
-#include <stdlib.h>
-#define Max 3
-int st[Max],top=-1;
-void push(int st[],int val){
-    if(top==Max-1){
-        printf("\n Stack overflow...");
-    }
-    else{
-        top++;
-        st[top]=val;
-    }
+#include <conio.h>
+#define SIZE 4
+struct stack
+{
+int ar[SIZE];
+int top;
+};
+struct stack st;
+int isFull()
+{
+if(st.top == SIZE - 1)
+{
+return 1;
 }
-int pop(int st[]){
-    int val;  
-    if(top==-1){
-        printf("\n Stack underflow");
-        return val;
-    }else{
-        val = st[top];
-        top--;
-        return val;
-    }
+else
+{
+return 0;
 }
-int peek(int st[]){
-    if(top==-1){
-        printf("\n Stack Empty");
-        return -1;
-
-    }else{
-        return (st[top]);
-    }
 }
-void display(){
-    int i;
-    if(top==-1){
-        printf("\n Stack Empty");
-    }else{
-        for(i=top;i>=0;i--){
-            printf("\n %d",st[i]);
-            printf("\n");
-        }
-    }
+int isEmpty()
+{
+if(st.top == -1)
+{
+return 1;
 }
-int main(){
-   int val,option;
-   do{
-     printf("\n *********Main Menu**********");
-     printf("\n 1 . Push");
-     printf("\n 2 . Pop");
-     printf("\n 3 . Peek");
-     printf("\n 4 . Display");
-     printf("\n 5 . Exit");
-     printf("\n ***************************");
-     
-     scanf("%d ",&option);
-     switch(option){
-        case 1: printf("\n Enter the number to be pushed on stack : ");
-                scanf("%d",&val);
-                push(st,val);
-                break;
-        case 2: val=pop(st); 
-                if(val!=-1) printf("\n The value deleted : %d ",val);
-                break;
-        case 3: val=peek(st);
-                if(val!=-1)  printf("\n The value stored : %d",val);
-                break;
-        case 4: display(st);break;
-     }
-
-    }while(option!=5);
- return 0;
-  }
+else
+{
+return 0;
+}
+}
+void push(int val)
+{
+if(isFull())
+{
+printf("Stack is full.\n");
+}
+else
+{
+st.top++;
+st.ar[st.top] = val;
+}
+}
+int pop()
+{
+if(isEmpty())
+{
+printf("Stack is empty.\n");
+return -1;
+}
+else
+{
+return (st.ar[st.top--]);
+}
+}
+void display()
+{
+int i;
+if(!isEmpty())
+{
+for(i = st.top; i > -1; i--)
+{
+printf("%d\n", st.ar[i]);
+}
+}
+else
+{
+printf("Stack is empty.\n");
+}
+}
+int main()
+{
+int j;
+clrscr();
+st.top = -1;
+pop();
+push(10);
+push(20);
+push(30);
+push(40);
+display();
+j = pop();
+printf("Popped value: %d\n", j);
+display();
+getch();
+return 0;
+}
